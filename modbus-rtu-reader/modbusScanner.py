@@ -1,4 +1,4 @@
-
+import datetime
 import time
 import setproctitle
 import meters.electric.universalMeter as um
@@ -22,12 +22,16 @@ class modbusScanner(object):
       self.errorDelaySecs = 60.0
       tty = self.serPort.replace("/dev/", "")
       self.procName = f"iot-scr:{tty}"
+      self.lastScanDelayDTS: datetime.datetime = datetime.datetime.utcnow()
 
    def loadConfig(self) -> bool:
       """
       :return:
       """
       return True
+
+   def nextRunInfo(self):
+      print(f"last run: {self.lastScanDelayDTS}")
 
    def run(self):
       """
@@ -41,6 +45,8 @@ class modbusScanner(object):
                self.__on_each_meter(meter)
             # delay on port scan
             print("\n\t+ + + main bus scan delay + + +\n")
+            self.lastScanDelayDTS = datetime.datetime.utcnow()
+            print(f"start delay: {self.lastScanDelayDTS}")
             time.sleep(self.scanDelaySecs)
          except Exception as e:
             print(e)
