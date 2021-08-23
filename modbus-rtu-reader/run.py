@@ -1,4 +1,4 @@
-#!/usr/xbin/env python3
+#!/usr/bin/env python3
 
 import time
 import multiprocessing as mp
@@ -8,6 +8,7 @@ import modbusScanner
 
 
 SYS_PROCS = []
+SCANNERS = []
 PROC_NAME = "iot-sbms-main"
 
 
@@ -34,6 +35,8 @@ def startModbusScanners():
          continue
       # - - - - - - - -
       _modbusScanner = modbusScanner.modbusScanner(serPort, meters)
+      global SCANNERS
+      SCANNERS.append(_modbusScanner)
       # create & start process
       proc = mp.Process(target=_modbusScanner.run)
       proc.start()
@@ -49,6 +52,11 @@ def monitorLoop():
          print(f"\n\t--- monitor loop ---\n\tsys_procs:")
          dump_sys_procs()
          time.sleep(16.0)
+         for ms in SCANNERS:
+            print(ms)
+            ms: modbusScanner.modbusScanner = ms
+            print(ms)
+            ms.nextRunInfo()
       except Exception as e:
          pass
 

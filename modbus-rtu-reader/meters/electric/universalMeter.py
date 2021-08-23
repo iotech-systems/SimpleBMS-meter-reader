@@ -63,18 +63,6 @@ class universalMeter(object):
          print(f"\n\t *** {e}")
 
    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-   def confirmModbusID(self, modbusAdrID: int):
-      addressReg: r.register = \
-         self.__get_register_by_name__(rn.regsNames.ModbusAddress)
-      # - - - - - -
-      if addressReg is None:
-         print("[ could not find ModbusAddress register! ]")
-         return False
-      # - - - - - -
-      addressRegOut: r.register = self.__read_meter_field__(addressReg)
-      return modbusAdrID == int(str(addressRegOut.regValue), 0)
-
-   # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
    """
       ping is used to see if the meter is responding for now it will
       ask for a known value. madbus address id can be such a value
