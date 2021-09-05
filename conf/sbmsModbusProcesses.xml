@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<system>
+    <!-- modbusProcess runs per tty device -->
+    <modbusProcess id="0x734AB56D" start="yes" tag="some tag 123" ttyDevice="/dev/ttyUSB0">
+        <meters>
+            <meter busType="modbus" busAddress="1" brand="orno" modelXML="orno504.xml" />
+            <meter busType="modbus" busAddress="2" brand="orno" modelXML="orno516.xml" />
+        </meters>
+        <processorJobs>
+            <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="4" />
+            <job type="registerStream" startIndex="2"  streamType="basicPwrStats" intervalMins="1" />
+        </processorJobs>
+    </modbusProcess>
+    <!-- modbusProcess runs per tty device -->
+    <modbusProcess id="0x734A456D" start="no" tag="23442 sam tag" ttyDevice="/dev/ttyUSB1">
+         <meters>
+            <meter busType="modbus" busAddress="33" brand="orno" modelXML="orno504.xml" />
+            <meter busType="modbus" busAddress="11" brand="orno" modelXML="orno516.xml" />
+        </meters>
+        <processorJobs>
+            <job type="registerStream" startIndex="1" streamType="kWhrs" intervalMins="6" />
+            <job type="registerStream" startIndex="2" streamType="basicPwrStats" intervalMins="2" />
+        </processorJobs>
+    </modbusProcess>
+</system>

@@ -1,0 +1,39 @@
+<registerStreamDefinitions>
+    <!-- definition to collect billable data -->
+    <streamRegisters streamName="kWhrs" streamTbl="stream.kwhrs">
+        <streamField name="ModbusAddress" notMappedValue="0" />
+        <streamField name="TotalActiveEnergy" notMappedValue="0" />
+        <streamField name="L1_TotalActiveEnergy" notMappedValue="0" />
+        <streamField name="L2_TotalActiveEnergy" notMappedValue="0" />
+        <streamField name="L3_TotalActiveEnergy" notMappedValue="0" />
+    </streamRegisters>
+    <!-- run to keep history of power consumption -->
+    <streamRegisters streamName="basicPwrStats" streamTbl="stream.basic_pwr_stats">
+        <streamField name="ModbusAddress" notMappedValue="0" />
+        <streamField name="GridFreqHz" notMappedValue="0" />
+        <streamField name="LineVoltage" notMappedValue="0" />
+        <streamField name="L1_Voltage" notMappedValue="0" />
+        <streamField name="L2_Voltage" notMappedValue="0" />
+        <streamField name="L3_Voltage" notMappedValue="0" />
+        <streamField name="TotalAmps" notMappedValue="0" />
+        <streamField name="L1_Amps" notMappedValue="0" />
+        <streamField name="L2_Amps" notMappedValue="0" />
+        <streamField name="L3_Amps" notMappedValue="0" />
+        <streamField name="TotalActivePower" notMappedValue="0" />
+        <streamField name="L1_ActivePower" notMappedValue="0" />
+        <streamField name="L2_ActivePower" notMappedValue="0" />
+        <streamField name="L3_ActivePower" notMappedValue="0" />
+        <!-- <streamField name="TotalReactivePower" notMappedValue="0" />
+        <streamField name="L1_ReactivePower" notMappedValue="0" />
+        <streamField name="L2_ReactivePower" notMappedValue="0" />
+        <streamField name="L3_ReactivePower" notMappedValue="0" /> -->
+        <streamField name="TotalPowerFactor" notMappedValue="0" />
+        <streamField name="L1_PowerFactor" notMappedValue="0" />
+        <streamField name="L2_PowerFactor" notMappedValue="0" />
+        <streamField name="L3_PowerFactor" notMappedValue="0" />
+        <!-- <streamField name="TotalReactiveEnergy" notMappedValue="0" />
+        <streamField name="L1_ReactiveEnergy" notMappedValue="0" />
+        <streamField name="L2_ReactiveEnergy" notMappedValue="0" />
+        <streamField name="L3_ReactiveEnergy" notMappedValue="0" /> -->
+    </streamRegisters>
+</registerStreamDefinitions>

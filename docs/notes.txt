@@ -1,0 +1,14 @@
+
+Notes about the workings of the system.
+
+Problem 01:
+   * addressing/identifying meter in database
+   -> use edge device hostname/MAC + modbus address id
+      -> hostname would come from /etc/hostname
+      -> MAC from edge dive network card
+      -> modbus address id would come directly from the meter
+      -> modbus has addressing of 0 to 247 with 0 belonging to the master
+      -> modbus address ids will be unique per edge device
+   ----
+   this way meters would automatically be identified and would make them
+   trackable
