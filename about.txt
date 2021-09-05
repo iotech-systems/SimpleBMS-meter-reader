@@ -1,0 +1,11 @@
+
+basic workings of the system:
+
+   1. system will be composed of a number of meters attached to a modbus/rs485
+   2. this modbus/rs485 will be connected to an edge-device at a ttyUSBx device
+      like: /dev/ttyUSB0 or /dev/ttyUSB1
+   3. a process per ttyUSBx device will run
+   4. process will have number of stream-threads running
+   5. each stream-thread will run at a configurable interval
+   6. stream-thread will read predefined registers in all the attached meters
+   7. stream-thread will post those readings into a collecting device within LAN

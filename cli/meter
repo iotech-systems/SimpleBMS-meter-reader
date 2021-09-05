@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+import sys
+from appbin import ping, readReg, xcmd
+
+
+CMDS = {"ping": ping.ping()
+   , "read_reg": readReg.readReg()
+   , "read_regs": None
+   , "write": None}
+
+
+def main():
+   cmdName = sys.argv[1]
+   if cmdName not in CMDS.keys():
+      print(f"bad cmd: {cmdName}")
+      return
+   command: xcmd.xcmd = CMDS[cmdName]
+   command.setArgs(sys.argv[2:])
+   command.run()
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if __name__ == "__main__":
+    main()
