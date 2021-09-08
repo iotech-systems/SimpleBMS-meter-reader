@@ -4,6 +4,8 @@ __license__ = "not sure yet"
 __url__ = "https://github.com/url"
 __version__ = "0.0.1"
 
+import datetime
+import time
 from typing import List
 import xml.etree.ElementTree as et
 import minimalmodbus as mm
@@ -52,8 +54,9 @@ class modbusBasedMeter(object):
          print(f"initMeter: {e}")
 
    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-   def readMappedFieldsStream(self) -> [List[meterFieldReading], False]:
+   def readMappedFieldsStreamFrame(self) -> [List[meterFieldReading], False]:
       try:
+         readStart = time.time()
          readings: List[meterFieldReading] = []
          """ -- scan data fields in this stream --
             this loop runs over a list of stream register names stored in xml file and 
@@ -86,6 +89,8 @@ class modbusBasedMeter(object):
             # - - - -
             readings.append(meterReading)
          # -- return all readings --
+         timeDiff = (time.time() - readStart)
+         print(f"timeDiff: {timeDiff}")
          return readings
       except Exception as e:
          print(f"\n\t *** {e}")

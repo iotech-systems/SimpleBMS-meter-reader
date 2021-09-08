@@ -66,7 +66,7 @@ class registerStreamJob(streamJobBase.streamJobBase):
          if not modbusMeter.ping():
             return False
          # -- meter found start reading --
-         readings: List[meterFieldReading] = modbusMeter.readMappedFieldsStream()
+         readings: List[meterFieldReading] = modbusMeter.readMappedFieldsStreamFrame()
          lstReadings = self.__readingsAsList(readings)
          jsonPackage = self.__createMeterJsonPackage__(busAdr, lstReadings, modelXml, streamRegsXml)
          actions.actions.send2streamer(jsonPackage)
