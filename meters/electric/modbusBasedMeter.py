@@ -56,7 +56,6 @@ class modbusBasedMeter(object):
    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
    def readMappedFieldsStreamFrame(self) -> [List[meterFieldReading], False]:
       try:
-         readStart = time.time()
          readings: List[meterFieldReading] = []
          """ -- scan data fields in this stream --
             this loop runs over a list of stream register names stored in xml file and 
@@ -89,8 +88,6 @@ class modbusBasedMeter(object):
             # - - - -
             readings.append(meterReading)
          # -- return all readings --
-         timeDiff = (time.time() - readStart)
-         print(f"timeDiff: {timeDiff}")
          return readings
       except Exception as e:
          print(f"\n\t *** {e}")

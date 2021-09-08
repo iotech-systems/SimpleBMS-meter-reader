@@ -66,9 +66,12 @@ class registerStreamJob(streamJobBase.streamJobBase):
          if not modbusMeter.ping():
             return False
          # -- meter found start reading --
+         starTime = time.time()
          readings: List[meterFieldReading] = modbusMeter.readMappedFieldsStreamFrame()
+         readTime = round((time.time() - starTime), 3)
          lstReadings = self.__readingsAsList(readings)
-         jsonPackage = self.__createMeterJsonPackage__(busAdr, lstReadings, modelXml, streamRegsXml)
+         jsonPackage = self.__createMeterJsonPackage__(busAdr, readTime, lstReadings
+            , modelXml, streamRegsXml)
          actions.actions.send2streamer(jsonPackage)
          # -- return readings --
          return readings
@@ -83,7 +86,7 @@ class registerStreamJob(streamJobBase.streamJobBase):
 
    def __checkMeterOutput__(self, readings: [List[dict], False]):
       if readings is False:
-         print("Meter field reading is False")
+         # print("Meter field reading is False")
          return
       # - - - - -
       print("__checkMeterOutput__")
@@ -93,23 +96,23 @@ class registerStreamJob(streamJobBase.streamJobBase):
       jsonBuff = json.dumps(buff)
       print(jsonBuff)
 
-   def __createMeterJsonPackage__(self, busAdr: int, readings: List[dict]
+   def __createMeterJsonPackage__(self, busAdr: int, readTime: float, readings: List[dict]
          , modelXml: xmlTree.Element, streamRegsXml: xmlTree.Element) -> str:
       # info about the stream, meter
       streamName = streamRegsXml.attrib["streamName"]
       streamTable = streamRegsXml.attrib["streamTbl"]
       meterBrand = modelXml.attrib["brand"]
       meterModel = modelXml.attrib["model"]
-      print(streamName, streamTable)
-      print(f"w: {self.xmlJob.attrib}")
       jpm: jsonPackageMaker = jsonPackageMaker()
       # - - - - -
       package = jpm.make(streamName, streamTable, meterBrand
-         , meterModel, busAdr, readings)
+         , meterModel, busAdr, readTime, readings)
       jsonBuff = json.dumps(package)
-      print(f"package: {jsonBuff}")
+      print(f"\tpackage: {jsonBuff}")
       return jsonBuff
 
+   """
    def __put_2_streamer__(self, jsonPackage: str):
       res = actions.actions.send2streamer(jsonPackage)
       print("res: {res}")
+   """
