@@ -4,9 +4,15 @@ import sys
 import minimalmodbus as mm
 
 
+# tty device
 ttydev = sys.argv[1]
-adrold = sys.argv[2]
-adrnew = sys.argv[3]
+# register holding modbus address
+regadr: int = int(sys.argv[2])
+# current modbus address value
+adrold: int = int(sys.argv[3])
+# new modbus address value
+adrnew: int = int(sys.argv[4])
+
 
 inst = mm.Instrument(ttydev, 1)
 inst.serial.baudrate = 9600
@@ -16,12 +22,21 @@ inst.debug = True
 
 
 def main():
+   # set current modbus address
    inst.address = adrold
-   inst.write_register(2, int(adrnew))
-   val = inst.read_register(2)
+   # upload new address
+   inst.write_register(regadr, adrnew)
+   # change to new modbus address
+   inst.address = adrnew
+   val = inst.read_register(regadr)
    print(f"new adr: {val}")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == "__main__":
-    main()
+   # - - - -
+   if sys.argv[1] == "?":
+      print("chngadr /dev/ttyUSB? regadr oldadr newadr")
+      exit(0)
+   # - - - -
+   main()

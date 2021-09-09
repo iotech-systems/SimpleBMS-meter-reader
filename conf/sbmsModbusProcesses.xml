@@ -14,7 +14,7 @@
     <!-- modbusProcess runs per tty device -->
     <modbusProcess id="0x734A456D" start="no" tag="23442 sam tag" ttyDevice="/dev/ttyUSB1">
          <meters>
-            <meter busType="modbus" busAddress="33" brand="orno" modelXML="orno504.xml" />
+            <meter busType="modbus" busAddress="33" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="11" brand="orno" modelXML="orno516.xml" />
         </meters>
         <processorJobs>
