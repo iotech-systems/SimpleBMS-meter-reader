@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 import sys
+import time
 import minimalmodbus as mm
 
 
 # tty device
 ttydev = sys.argv[1]
 if ttydev == "?":
-   print("chngadr /dev/ttyUSB? regadr oldadr newadr")
+   print("\n --> ./chngadr.py /dev/ttyUSB? regadr oldadr newadr\n")
    exit(0)
 
 # register holding modbus address
@@ -26,14 +27,19 @@ inst.debug = True
 
 
 def main():
-   # set current modbus address
-   inst.address = adrold
-   # upload new address
-   inst.write_register(regadr, adrnew)
-   # change to new modbus address
-   inst.address = adrnew
-   val = inst.read_register(regadr)
-   print(f"new adr: {val}")
+   try:
+      # set current modbus address
+      inst.address = adrold
+      # upload new address
+      inst.write_register(regadr, adrnew)
+      # change to new modbus address
+      time.sleep(0.480)
+      inst.address = adrnew
+   except mm.InvalidResponseError as e:
+      val = inst.read_register(regadr)
+      print(f"new adr: {val}")
+   except Exception as e:
+      print(f"shit! : {e}")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
