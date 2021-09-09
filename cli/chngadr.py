@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 import sys
-import time
+import time, setproctitle
 import minimalmodbus as mm
+
+
+PROC_NAME = "sbms-reader"
 
 
 # tty device
@@ -28,6 +31,7 @@ inst.debug = True
 
 def main():
    try:
+      setproctitle.setproctitle(PROC_NAME)
       # set current modbus address
       inst.address = adrold
       # upload new address
