@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import setproctitle
 from typing import List
 from core import xmlConfigLoader, serviceStarter,\
    serviceMonitorLoop, modbusProcess
@@ -35,4 +36,5 @@ def main():
 
 # - - - - - - entry point - - - - - -
 if __name__ == "__main__":
+   setproctitle.setproctitle(PROC_NAME)
    main()
