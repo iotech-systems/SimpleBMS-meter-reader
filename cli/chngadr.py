@@ -6,6 +6,10 @@ import minimalmodbus as mm
 
 # tty device
 ttydev = sys.argv[1]
+if ttydev == "?":
+   print("chngadr /dev/ttyUSB? regadr oldadr newadr")
+   exit(0)
+
 # register holding modbus address
 regadr: int = int(sys.argv[2])
 # current modbus address value
@@ -34,9 +38,4 @@ def main():
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == "__main__":
-   # - - - -
-   if sys.argv[1] == "?":
-      print("chngadr /dev/ttyUSB? regadr oldadr newadr")
-      exit(0)
-   # - - - -
    main()
