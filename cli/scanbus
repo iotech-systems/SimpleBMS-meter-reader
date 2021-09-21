@@ -11,7 +11,7 @@ if len(sys.argv) == 1:
 
 ttydev = sys.argv[1]
 if "~" not in sys.argv[2]:
-   print(f"\n\tbad input: {sys.argv[2]}")
+   print(f"\n\tbad input: {sys.argv[2]} -> should be X~X+n for n addresses\n")
    exit(1)
 adrange = sys.argv[2].strip().split("~")
 brate = int(sys.argv[3])
