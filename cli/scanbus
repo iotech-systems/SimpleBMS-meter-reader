@@ -5,13 +5,15 @@ import minimalmodbus as mm
 
 
 if len(sys.argv) == 1:
-   print("\n\t./scanbus /dev/ttyUSBx baudrate parity timeout\n")
+   print("\n\t./scanbus /dev/ttyUSBx adr-range baudrate parity timeout")
+   print("\tie: ./scanbus /dev/ttyUSB1 10~20 9600 E 0.5\n")
    exit(0)
 
 ttydev = sys.argv[1]
-brate = int(sys.argv[2])
-parity = sys.argv[3]
-timeout = float(sys.argv[4])
+adrange = sys.argv[2].strip().split("~")
+brate = int(sys.argv[3])
+parity = sys.argv[4]
+timeout = float(sys.argv[5])
 
 inst = mm.Instrument(ttydev, 1)
 inst.serial.baudrate = brate
@@ -21,10 +23,11 @@ inst.debug = True
 
 
 def main():
-   for i in range(10, 24):
+   start, end = [int(x) for x in adrange]
+   for i in range(start, end):
       try:
-         time.sleep(0.8)
-         print(f"scanning address: {i}")
+         time.sleep(0.64)
+         print(f"scanning modbus address: {i} -> ", end="")
          inst.address = i
          val = inst.read_register(2)
          print(f" + response: {val}")
