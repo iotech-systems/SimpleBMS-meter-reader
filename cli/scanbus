@@ -15,7 +15,7 @@ if "~" not in sys.argv[2]:
    exit(1)
 adrange = sys.argv[2].strip().split("~")
 brate = int(sys.argv[3])
-parity = sys.argv[4]
+parity = sys.argv[4].upper()
 timeout = float(sys.argv[5])
 
 inst = mm.Instrument(ttydev, 1)
@@ -39,6 +39,7 @@ def main():
          print(" - no response!")
    # ----
    print("\n\tScan complete!\n")
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == "__main__":
