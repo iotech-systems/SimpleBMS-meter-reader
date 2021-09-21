@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sbms-meter-reader.iml" filepath="$PROJECT_DIR$/.idea/sbms-meter-reader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modbus-rtu-reader.iml" filepath="$PROJECT_DIR$/.idea/modbus-rtu-reader.iml" />
     </modules>
   </component>
 </project>

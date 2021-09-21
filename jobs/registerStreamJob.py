@@ -103,6 +103,8 @@ class registerStreamJob(streamJobBase.streamJobBase):
       streamTable = streamRegsXml.attrib["streamTbl"]
       meterBrand = modelXml.attrib["brand"]
       meterModel = modelXml.attrib["model"]
+      # print(streamName, streamTable)
+      # print(f"w: {self.xmlJob.attrib}")
       jpm: jsonPackageMaker = jsonPackageMaker()
       # - - - - -
       package = jpm.make(streamName, streamTable, meterBrand
@@ -111,8 +113,6 @@ class registerStreamJob(streamJobBase.streamJobBase):
       print(f"\tpackage: {jsonBuff}")
       return jsonBuff
 
-   """
    def __put_2_streamer__(self, jsonPackage: str):
       res = actions.actions.send2streamer(jsonPackage)
       print("res: {res}")
-   """
