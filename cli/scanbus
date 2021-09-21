@@ -5,7 +5,7 @@ import minimalmodbus as mm
 
 
 if len(sys.argv) == 1:
-   print("\n\t./scanbus /dev/ttyUSBx adr-range baudrate parity timeout")
+   print("\n\t./scanbus ttyDevice address-range baudrate parity timeout")
    print("\tie: ./scanbus /dev/ttyUSB1 10~20 9600 E 0.8\n")
    exit(0)
 
