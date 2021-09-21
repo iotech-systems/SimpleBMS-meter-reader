@@ -37,7 +37,8 @@ def main():
          print(f" + response: {val}")
       except:
          print(" - no response!")
-
+   # ----
+   print("\n\tScan complete!\n")
 
 # - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == "__main__":
