@@ -7,6 +7,7 @@
             <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="17" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="19" brand="orno" modelXML="orno516.xml" />
+            <meter busType="modbus" busAddress="21" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="22" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="23" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="24" brand="orno" modelXML="orno516.xml" />
