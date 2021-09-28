@@ -94,7 +94,7 @@ class registerStreamJob(streamJobBase.streamJobBase):
       for reading in readings:
          buff.append(reading.toDict())
       jsonBuff = json.dumps(buff)
-      print(jsonBuff)
+      # print(jsonBuff)
 
    def __createMeterJsonPackage__(self, busAdr: int, readTime: float, readings: List[dict]
          , modelXml: xmlTree.Element, streamRegsXml: xmlTree.Element) -> str:
@@ -110,9 +110,9 @@ class registerStreamJob(streamJobBase.streamJobBase):
       package = jpm.make(streamName, streamTable, meterBrand
          , meterModel, busAdr, readTime, readings)
       jsonBuff = json.dumps(package)
-      print(f"\tpackage: {jsonBuff}")
+      # print(f"\tpackage: {jsonBuff}")
       return jsonBuff
 
    def __put_2_streamer__(self, jsonPackage: str):
       res = actions.actions.send2streamer(jsonPackage)
-      print("res: {res}")
+      print(f"res: {res}")
