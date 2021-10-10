@@ -4,6 +4,7 @@
 """
 import time
 import datetime as dt
+import setproctitle
 import xml.etree.ElementTree as etXml
 from typing import List
 from threading import Thread
@@ -48,6 +49,7 @@ class modbusProcess(Process):
 
    def run(self) -> None:
       try:
+         setproctitle.setproctitle("modbus-scanner")
          # - - start monitor thread - -
          if not self.__start_monitor_thread__():
             print("unable to start modbus processor thread loop")

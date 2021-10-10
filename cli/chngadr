@@ -6,6 +6,10 @@ import time
 import minimalmodbus as mm
 
 
+if len(sys.argv) != 4:
+   print("./chngadr /dev/ttyUSBx oldAddress newAddress")
+   exit(0)
+
 ttydev = str(sys.argv[1])
 adrold = int(sys.argv[2])
 adrnew = int(sys.argv[3])

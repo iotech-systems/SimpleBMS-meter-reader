@@ -6,6 +6,7 @@
             <meter busType="modbus" busAddress="15" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="17" brand="orno" modelXML="orno516.xml" />
+            <meter busType="modbus" busAddress="18" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="19" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="21" brand="orno" modelXML="orno516.xml" />
             <meter busType="modbus" busAddress="22" brand="orno" modelXML="orno516.xml" />
@@ -20,8 +21,9 @@
     <!-- modbusProcess runs per tty device -->
     <modbusProcess id="0x00010002" start="yes" tag="23442 sam tag" ttyDevice="/dev/ttyUSB0">
          <meters>
-            <meter busType="modbus" busAddress="29" brand="orno" modelXML="orno516.xml" />
-            <meter busType="modbus" busAddress="36" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="29" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="30" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="36" brand="orno" modelXML="orno516.xml" />
         </meters>
         <processorJobs>
             <job type="registerStream" startIndex="1" streamType="kWhrs" intervalMins="6" />
