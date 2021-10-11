@@ -2,9 +2,7 @@
 <meter type="electric" tag="orno516" brand="orno" model="orno516">
     <serial baudrate="9600" parity="E" stopbits="1" timeoutSecs="0.20" />
     <registers>
-        <!--
-            mode="" -> defaults: register; unit="" -> defaults: no unit
-        -->
+        <!-- mode="" -> defaults: register; unit="" -> defaults: no unit -->
         <register address="0x0000" size="2" name="SerialNumber" decpnt="1" mode="" unit="" />
         <register address="0x0002" size="1" name="ModbusAddress" decpnt="0" unit="" />
         <register address="0x0003" size="1" name="BaudRate" decpnt="1" unit="" />

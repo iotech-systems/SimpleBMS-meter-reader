@@ -46,7 +46,7 @@ class modbusBasedMeter(object):
 
    def initMeter(self) -> None:
       try:
-         # set modbus address register
+         # -- set modbus address register --
          serXml = self.meterXml.find("serial")
          self.meterSerial = meterSerial.meterSerial(serXml)
          self.meterInst: mm.Instrument = self.__createInstrument__()

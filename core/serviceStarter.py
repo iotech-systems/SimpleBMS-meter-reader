@@ -1,5 +1,6 @@
 
 from typing import List
+import xml.etree.ElementTree as et
 from core import xmlConfigLoader, modbusProcess
 from core.sys import modbusAttrib
 
@@ -10,7 +11,7 @@ class serviceStarter(object):
       self.conf = conf
       self.modbusProcessors: List[modbusProcess.modbusProcess] = []
 
-   def loadInit(self):
+   def initLoad(self):
       self.__load_modbus_processors__()
       self.__init_modbus_processors__()
 
@@ -19,10 +20,18 @@ class serviceStarter(object):
       return self.modbusProcessors
 
    def __load_modbus_processors__(self):
-      procsDefs: [] = self.conf.startConfXml.findall("modbusProcess")
+      # get all modbusProcess xml nodes
+      tag = "modbusProcess"
+      procsDefs: List[et.Element] = self.conf.modbusProcsXml.findall(tag)
       for procDef in procsDefs:
          # start only those marked for start with yes
          if procDef.attrib[modbusAttrib.start].upper() == "YES":
+            ttyDev = procDef.attrib["ttyDevice"]
+            if ttyDev == "NotFound":
+               print("serial device not found for modbusProcess:")
+               print(f"\t{procDef.attrib}")
+               continue
+            # -- should run this process --
             self.modbusProcessors.append(modbusProcess.modbusProcess(procDef))
 
    def __init_modbus_processors__(self):

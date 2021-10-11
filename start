@@ -3,7 +3,8 @@
 import setproctitle
 from typing import List
 from core import xmlConfigLoader, serviceStarter,\
-   serviceMonitorLoop, modbusProcess
+   serviceMonitorLoop, modbusProcess, actions
+from sbmslib.shared.models import infoReport
 
 
 CONF_LOADER: xmlConfigLoader.xmlConfigLoader
@@ -18,14 +19,24 @@ def main():
       if not CONF_LOADER.loadConfXMLs():
          print("\t--- openbms exiting ---")
          exit(1)
+      # -- check for modbus address conflicts --
+      mbCollisions = CONF_LOADER.detectModbusAddressCollisions()
+      if len(mbCollisions) != 0:
+         msgTxt = ""
+         infoRpt: infoReport = infoReport.infoReport(infoMsg=msgTxt
+            , infoTag=infoReport.infoReport.WARNING)
+         actions.actions.sendInfo(infoRpt)
       # - - - - - - -
-      print("\n\t--- openbms starting --")
+      if CONF_LOADER.detectMeterSerialDevices():
+         pass
+      # - - - - - - -
+      print("\n\t-- openbms starting --")
       srvStarter: serviceStarter.serviceStarter = \
          serviceStarter.serviceStarter(CONF_LOADER)
-      srvStarter.loadInit()
+      srvStarter.initLoad()
       procs: List[modbusProcess.modbusProcess] = srvStarter.start()
       if len(procs) == 0:
-         print("\n\t--- openbms unable to start! ~ exiting --")
+         print("\n\t-- openbms unable to start! ~ exiting --")
          exit(2)
       # - - - - - - -
       monitorLoop: serviceMonitorLoop.serviceMonitorLoop = \
