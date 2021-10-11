@@ -103,7 +103,7 @@ class modbusBasedMeter(object):
       if not rval:
          print(f"\tPING {self.modbusAddress}: NoResponse!")
       else:
-         print(f"\tPING {self.modbusAddress}: PONG :)")
+         print(f"\tPING {self.modbusAddress}: PONG OK!")
       # - - - - -
       return rval
 
