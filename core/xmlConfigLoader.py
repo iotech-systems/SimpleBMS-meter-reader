@@ -96,7 +96,7 @@ class xmlConfigLoader(object):
       """
       for modbusProc in modbusProcs:
          try:
-            print(modbusProc.attrib)
+            print(f"\t-- pre-scanning: {modbusProc.attrib} --")
             ttyDev = modbusProc.attrib["ttyDevice"]
             if ttyDev.upper() == tds.ttyUSBDeviceScanner.AUTO:
                devScanner = tds.ttyUSBDeviceScanner()
@@ -107,5 +107,7 @@ class xmlConfigLoader(object):
                   modbusProc.attrib["ttyDevice"] = "NotFound"
                else:
                   modbusProc.attrib["ttyDevice"] = usbPort.device
+               # -- post scan --
+               print(f"\t-- post-scanning: {modbusProc.attrib} --")
          except Exception as e:
             print(e)
