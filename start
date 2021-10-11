@@ -27,6 +27,12 @@ def main():
             , infoTag=infoReport.infoReport.WARNING)
          actions.actions.sendInfo(infoRpt)
       # - - - - - - -
+      buff = """
+         \t - - - - - - - - - - - - - - - - - - - - -
+         \t  auto detecting USB serial devices
+         \t - - - - - - - - - - - - - - - - - - - - -
+      """
+      print(buff)
       if CONF_LOADER.detectMeterSerialDevices():
          pass
       # - - - - - - -
