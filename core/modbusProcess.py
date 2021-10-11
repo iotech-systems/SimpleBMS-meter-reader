@@ -136,5 +136,5 @@ class modbusProcess(Process):
       meters = self.xmlConf.findall("meters/meter")
       out = []
       for m in meters:
-         out.append(m.attrib["address"])
+         out.append(m.attrib["busAddress"])
       return ", ".join(out)
