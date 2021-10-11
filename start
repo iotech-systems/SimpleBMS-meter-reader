@@ -2,8 +2,9 @@
 
 import setproctitle
 from typing import List
-from core import xmlConfigLoader, serviceStarter,\
+from core import xmlConfigLoader,\
    serviceMonitorLoop, modbusProcess, actions
+from core import serviceStarter as ss
 from sbmslib.shared.models import infoReport
 
 
@@ -33,12 +34,10 @@ def main():
          \t - - - - - - - - - - - - - - - - - - - - -
       """
       print(buff)
-      if CONF_LOADER.detectMeterSerialDevices():
-         pass
+      CONF_LOADER.detectMeterSerialDevices()
       # - - - - - - -
       print("\n\t-- openbms starting --")
-      srvStarter: serviceStarter.serviceStarter = \
-         serviceStarter.serviceStarter(CONF_LOADER)
+      srvStarter: ss.serviceStarter = ss.serviceStarter(CONF_LOADER)
       srvStarter.initLoad()
       procs: List[modbusProcess.modbusProcess] = srvStarter.start()
       if len(procs) == 0:

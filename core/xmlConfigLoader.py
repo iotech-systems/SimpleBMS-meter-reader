@@ -96,7 +96,7 @@ class xmlConfigLoader(object):
       """
       for modbusProc in modbusProcs:
          try:
-            print(f"\t-- pre-scanning: {modbusProc.attrib} --")
+            print(f"\n\t-- pre-scanning: {modbusProc.attrib} --")
             ttyDev = modbusProc.attrib["ttyDevice"]
             if ttyDev.upper() == tds.ttyUSBDeviceScanner.AUTO:
                devScanner = tds.ttyUSBDeviceScanner()
