@@ -27,6 +27,7 @@ class modbusProcess(Process):
       self.id: str = self.xmlConf.attrib["id"].strip()
       self.tag: str = self.xmlConf.attrib["tag"].strip()
       self.ttyDevice = self.xmlConf.attrib["ttyDevice"].strip()
+      self.modbusIDs = self.__modbus_ids__()
       self.processorJobs: List[etXml.Element] = []
       self.processorMeters = None
       self.monitorThread = None
@@ -71,7 +72,9 @@ class modbusProcess(Process):
    def __monitor_thread__(self):
       while True:
          try:
-            print(f"\n\t-- modbusProcessorMonitor: {self.ttyDevice} --\n")
+            buff = f"\n\t-- modbusProcessorMonitor: {self.ttyDevice} +" \
+               f" modbusIDS: {self.modbusIDs} --\n"
+            print(buff)
          except Exception as e:
             print(e)
          finally:
@@ -128,3 +131,10 @@ class modbusProcess(Process):
       print("\n\t- - - running job - - -")
       print(f"\tmodbusProcess ~ id: {self.id} ~ tag: {self.tag} ~ ttyDev: {self.ttyDevice}")
       print(job.attrib)
+
+   def __modbus_ids__(self) -> str:
+      meters = self.xmlConf.findall("meters/meter")
+      out = []
+      for m in meters:
+         out.append(m.attrib["address"])
+      return ", ".join(out)

@@ -1,7 +1,5 @@
 
-import minimalmodbus as mm
 import os.path, typing as t
-from serial import SerialBase
 import xml.etree.ElementTree as et
 from sbmslib.shared.core import ttyDeviceScanner as tds
 
