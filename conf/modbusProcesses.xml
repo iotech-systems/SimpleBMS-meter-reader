@@ -23,7 +23,9 @@
          <meters>
              <meter busType="modbus" busAddress="29" brand="orno" modelXML="orno516.xml" />
              <meter busType="modbus" busAddress="30" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="34" brand="orno" modelXML="orno516.xml" />
              <meter busType="modbus" busAddress="36" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="37" brand="orno" modelXML="orno516.xml" />
         </meters>
         <processorJobs>
             <job type="registerStream" startIndex="1" streamType="kWhrs" intervalMins="6" />
