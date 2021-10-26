@@ -1,7 +1,7 @@
 
 import os.path, typing as t
 import xml.etree.ElementTree as et
-from sbmslib.shared.core import ttyDeviceScanner as tds
+from openbmslib.shared.core import ttyDeviceScanner as tds
 
 
 MODBUS_PROCS_XML = "conf/modbusProcesses.xml"

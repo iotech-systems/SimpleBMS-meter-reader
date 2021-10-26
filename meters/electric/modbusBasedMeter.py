@@ -4,13 +4,12 @@ __license__ = "not sure yet"
 __url__ = "https://github.com/url"
 __version__ = "0.0.1"
 
-import datetime
-import time
+import datetime, time
 from typing import List
 import xml.etree.ElementTree as et
 import minimalmodbus as mm
 from meters.electric import register, meterSerial
-from sbmslib.shared.core import registerNames
+from openbmslib.shared.core import registerNames
 from meters.electric.register import register
 from meters.electric.registerDataMode import registerDataMode
 from meters.electric.meterFieldReading import meterFieldReading

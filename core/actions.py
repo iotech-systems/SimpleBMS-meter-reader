@@ -2,11 +2,11 @@
 import datetime
 import requests as r
 import conf.restapi as s
-import sbmslib.shared.core.registerNames as rn
+import openbmslib.shared.core.registerNames as rn
 import meters.electric.modbusBasedMeter as um
-import sbmslib.shared.models.kWhReport as kwr
-import sbmslib.shared.models.alarmReport as ar
-import sbmslib.shared.models.infoReport as ir
+import openbmslib.shared.models.kWhReport as kwr
+import openbmslib.shared.models.alarmReport as ar
+import openbmslib.shared.models.infoReport as ir
 
 
 BASE_DATE_2020 = datetime.datetime(2020, 1, 1, 0, 0, 1)

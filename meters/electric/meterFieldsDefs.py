@@ -10,7 +10,7 @@ __version__ = "0.0.1"
 
 from typing import List
 from meters.electric.registerUnits import registerUnits as ru
-from sbmslib.shared.core.registerNames import registerNames as rn
+from openbmslib.shared.core.registerNames import registerNames as rn
 
 
 class meterDataField(object):
