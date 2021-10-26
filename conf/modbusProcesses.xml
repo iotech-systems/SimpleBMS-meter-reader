@@ -26,6 +26,15 @@
              <meter busType="modbus" busAddress="34" brand="orno" modelXML="orno516.xml" />
              <meter busType="modbus" busAddress="36" brand="orno" modelXML="orno516.xml" />
              <meter busType="modbus" busAddress="37" brand="orno" modelXML="orno516.xml" />
+             <!-- right most closet has number 3 on top of the knobs -->
+             <meter busType="modbus" busAddress="46" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="47" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="48" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="49" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="50" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="51" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="52" brand="orno" modelXML="orno516.xml" />
+             <meter busType="modbus" busAddress="53" brand="orno" modelXML="orno516.xml" />
         </meters>
         <processorJobs>
             <job type="registerStream" startIndex="1" streamType="kWhrs" intervalMins="6" />
