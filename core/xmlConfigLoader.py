@@ -30,7 +30,6 @@ class xmlConfigLoader(object):
          xmlConfigLoader.__confirm_conf_files__()
          self.regStreamDefsXml = et.ElementTree().parse(STREAM_DEFS_XML)
          tmp: et.Element = et.ElementTree().parse(MODBUS_PROCS_XML)
-         self.hostname = "omms-edge-p16"
          xpath = f"edge[@hostname=\"{self.hostname}\"]"
          self.modbusProcsXml = tmp.find(xpath)
          # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)

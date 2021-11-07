@@ -5,14 +5,18 @@
         <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto">
             <meters>
                 <meter busType="modbus" busAddress="10" brand="orno" modelXML="orno516.xml" />
-                <meter busType="modbus" busAddress="11" brand="orno" modelXML="orno516.xml" />
+                <!-- <meter busType="modbus" busAddress="11" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="12" brand="orno" modelXML="orno516.xml" />
-                <meter busType="modbus" busAddress="13" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="13" brand="orno" modelXML="orno516.xml" /> -->
                 <meter busType="modbus" busAddress="14" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="15" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="17" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="18" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="19" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="20" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="21" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="22" brand="orno" modelXML="orno516.xml" />
             </meters>
             <processorJobs>
                 <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="6" />
