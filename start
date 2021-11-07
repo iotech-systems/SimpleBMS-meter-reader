@@ -5,7 +5,7 @@ from typing import List
 from core import xmlConfigLoader,\
    serviceMonitorLoop, modbusProcess, actions
 from core import serviceStarter as ss
-from openbmslib.shared.models import infoReport
+from ommslib.shared.models import infoReport
 
 
 CONF_LOADER: xmlConfigLoader.xmlConfigLoader

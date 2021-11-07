@@ -9,7 +9,7 @@ from typing import List
 import xml.etree.ElementTree as et
 import minimalmodbus as mm
 from meters.electric import register, meterSerial
-from openbmslib.shared.core import registerNames
+from ommslib.shared.core import registerNames
 from meters.electric.register import register
 from meters.electric.registerDataMode import registerDataMode
 from meters.electric.meterFieldReading import meterFieldReading

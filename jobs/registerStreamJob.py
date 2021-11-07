@@ -6,7 +6,7 @@ from core import streamJobBase, xmlConfigLoader, actions
 from core.sys import jobXmlAttrib, meterXmlAttrib
 from meters.electric import modbusBasedMeter as mbm
 from meters.electric.meterFieldReading import meterFieldReading
-from openbmslib.shared.utils.jsonPackageMaker import jsonPackageMaker
+from ommslib.shared.utils.jsonPackageMaker import jsonPackageMaker
 
 
 INNER_METER_DELAY = 0.333
