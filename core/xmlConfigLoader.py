@@ -13,6 +13,9 @@ class xmlConfigLoader(object):
    cache = {}
 
    def __init__(self):
+      self.hostname = None
+      with open("/etc/hostname") as h:
+         self.hostname = h.read().strip()
       self.regStreamDefsXml: et.ElementTree = None
       self.modbusProcsXml: et.ElementTree = None
 
@@ -26,7 +29,11 @@ class xmlConfigLoader(object):
       try:
          xmlConfigLoader.__confirm_conf_files__()
          self.regStreamDefsXml = et.ElementTree().parse(STREAM_DEFS_XML)
-         self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
+         tmp: et.Element = et.ElementTree().parse(MODBUS_PROCS_XML)
+         self.hostname = "omms-edge-p16"
+         xpath = f"edge[@hostname=\"{self.hostname}\"]"
+         self.modbusProcsXml = tmp.find(xpath)
+         # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
          return True
       except FileNotFoundError as e:
          print(f"\n{e}\n\t--- stopping config loading process ---\n")
