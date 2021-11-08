@@ -4,11 +4,12 @@ __license__ = "not sure yet"
 __url__ = "https://github.com/url"
 __version__ = "0.0.1"
 
+import datetime, time
 from typing import List
 import xml.etree.ElementTree as et
 import minimalmodbus as mm
 from meters.electric import register, meterSerial
-from sbmslib.shared.core import registerNames
+from ommslib.shared.core import registerNames
 from meters.electric.register import register
 from meters.electric.registerDataMode import registerDataMode
 from meters.electric.meterFieldReading import meterFieldReading
@@ -44,7 +45,7 @@ class modbusBasedMeter(object):
 
    def initMeter(self) -> None:
       try:
-         # set modbus address register
+         # -- set modbus address register --
          serXml = self.meterXml.find("serial")
          self.meterSerial = meterSerial.meterSerial(serXml)
          self.meterInst: mm.Instrument = self.__createInstrument__()
@@ -52,7 +53,7 @@ class modbusBasedMeter(object):
          print(f"initMeter: {e}")
 
    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-   def readMappedFieldsStream(self) -> [List[meterFieldReading], False]:
+   def readMappedFieldsStreamFrame(self) -> [List[meterFieldReading], False]:
       try:
          readings: List[meterFieldReading] = []
          """ -- scan data fields in this stream --
@@ -101,7 +102,7 @@ class modbusBasedMeter(object):
       if not rval:
          print(f"\tPING {self.modbusAddress}: NoResponse!")
       else:
-         print(f"\tPING {self.modbusAddress}: PONG :)")
+         print(f"\tPING {self.modbusAddress}: PONG OK!")
       # - - - - -
       return rval
 

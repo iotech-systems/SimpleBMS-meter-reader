@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<system>
+    <edge hostname="omms-edge-b410">
+        <!-- modbusProcess runs per tty device -->
+        <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto">
+            <meters>
+                <meter busType="modbus" busAddress="10" brand="orno" modelXML="orno516.xml" />
+                <!-- <meter busType="modbus" busAddress="11" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="12" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="13" brand="orno" modelXML="orno516.xml" /> -->
+                <meter busType="modbus" busAddress="14" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="15" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="17" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="18" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="19" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="20" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="21" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="22" brand="orno" modelXML="orno516.xml" />
+            </meters>
+            <processorJobs>
+                <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="6" />
+                <job type="registerStream" startIndex="2"  streamType="basicPwrStats" intervalMins="2" />
+            </processorJobs>
+        </modbusProcess>
+    </edge>
+    <edge hostname="omms-edge-p16">
+        <!-- modbusProcess runs per tty device -->
+        <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto">
+            <meters>
+                <meter busType="modbus" busAddress="15" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="17" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="18" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="19" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="21" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="22" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="23" brand="orno" modelXML="orno516.xml" />
+                <meter busType="modbus" busAddress="24" brand="orno" modelXML="orno516.xml" />
+            </meters>
+            <processorJobs>
+                <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="6" />
+                <job type="registerStream" startIndex="2"  streamType="basicPwrStats" intervalMins="2" />
+            </processorJobs>
+        </modbusProcess>
+        <!-- modbusProcess runs per tty device -->
+        <modbusProcess id="0x0002" start="yes" tag="ModbusB" ttyDevice="auto">
+             <meters>
+                 <meter busType="modbus" busAddress="29" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="30" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="31" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="32" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="33" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="34" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="35" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="36" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="37" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="38" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="39" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="40" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="41" brand="orno" modelXML="orno516.xml" />
+                 <!-- right most closet has number 3 on top of the knobs -->
+                 <meter busType="modbus" busAddress="46" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="47" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="48" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="49" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="50" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="51" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="52" brand="orno" modelXML="orno516.xml" />
+                 <meter busType="modbus" busAddress="53" brand="orno" modelXML="orno516.xml" />
+            </meters>
+            <processorJobs>
+                <job type="registerStream" startIndex="1" streamType="kWhrs" intervalMins="6" />
+                <job type="registerStream" startIndex="2" streamType="basicPwrStats" intervalMins="2" />
+            </processorJobs>
+        </modbusProcess>
+    </edge>
+</system>

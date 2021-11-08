@@ -1,27 +1,47 @@
 #!/usr/bin/env python3
 
-from core.aliases import *
-from core import xmlConfigLoader, serviceStarter, serviceMonitorLoop
+import setproctitle
+from typing import List
+from core import xmlConfigLoader,\
+   serviceMonitorLoop, modbusProcess, actions
+from core import serviceStarter as ss
+from ommslib.shared.models import infoReport
 
 
 CONF_LOADER: xmlConfigLoader.xmlConfigLoader
-PROC_NAME = "sbms-edge"
+PROC_NAME = "openbms-edge"
 
 
 def main():
    try:
+      setproctitle.setproctitle(PROC_NAME)
       global CONF_LOADER
       CONF_LOADER = xmlConfigLoader.xmlConfigLoader()
       if not CONF_LOADER.loadConfXMLs():
-         print("\t--- sbms exiting ---")
+         print("\t--- openbms exiting ---")
          exit(1)
+      # -- check for modbus address conflicts --
+      mbCollisions = CONF_LOADER.detectModbusAddressCollisions()
+      if len(mbCollisions) != 0:
+         msgTxt = ""
+         infoRpt: infoReport = infoReport.infoReport(infoMsg=msgTxt
+            , infoTag=infoReport.infoReport.WARNING)
+         actions.actions.sendInfo(infoRpt)
       # - - - - - - -
-      print("\n\t--- sbms starting --")
-      srvStarter: serviceStarter.serviceStarter = serviceStarter.serviceStarter(CONF_LOADER)
-      srvStarter.loadInit()
-      procs: ModbusProcessorList = srvStarter.start()
+      buff = """
+         \t - - - - - - - - - - - - - - - - - - - - -
+         \t  auto detecting USB serial devices
+         \t - - - - - - - - - - - - - - - - - - - - -
+      """
+      print(buff)
+      CONF_LOADER.detectMeterSerialDevices()
+      # - - - - - - -
+      print("\n\t-- openbms starting --")
+      srvStarter: ss.serviceStarter = ss.serviceStarter(CONF_LOADER)
+      srvStarter.initLoad()
+      procs: List[modbusProcess.modbusProcess] = srvStarter.start()
       if len(procs) == 0:
-         print("\n\t--- sbms unable to start! ~ exiting --")
+         print("\n\t-- openbms unable to start! ~ exiting --")
          exit(2)
       # - - - - - - -
       monitorLoop: serviceMonitorLoop.serviceMonitorLoop = \

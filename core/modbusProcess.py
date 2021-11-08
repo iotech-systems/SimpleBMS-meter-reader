@@ -4,6 +4,7 @@
 """
 import time
 import datetime as dt
+import setproctitle
 import xml.etree.ElementTree as etXml
 from typing import List
 from threading import Thread
@@ -26,6 +27,7 @@ class modbusProcess(Process):
       self.id: str = self.xmlConf.attrib["id"].strip()
       self.tag: str = self.xmlConf.attrib["tag"].strip()
       self.ttyDevice = self.xmlConf.attrib["ttyDevice"].strip()
+      self.modbusIDs = self.__modbus_ids__()
       self.processorJobs: List[etXml.Element] = []
       self.processorMeters = None
       self.monitorThread = None
@@ -48,6 +50,7 @@ class modbusProcess(Process):
 
    def run(self) -> None:
       try:
+         setproctitle.setproctitle("modbus-scanner")
          # - - start monitor thread - -
          if not self.__start_monitor_thread__():
             print("unable to start modbus processor thread loop")
@@ -69,7 +72,9 @@ class modbusProcess(Process):
    def __monitor_thread__(self):
       while True:
          try:
-            print(f"\n\t-- modbusProcessorMonitor: {self.ttyDevice} --\n")
+            buff = f"\n\t-- modbusProcessorMonitor: {self.ttyDevice} +" \
+               f" modbusIDS: {self.modbusIDs} --\n"
+            print(buff)
          except Exception as e:
             print(e)
          finally:
@@ -126,3 +131,10 @@ class modbusProcess(Process):
       print("\n\t- - - running job - - -")
       print(f"\tmodbusProcess ~ id: {self.id} ~ tag: {self.tag} ~ ttyDev: {self.ttyDevice}")
       print(job.attrib)
+
+   def __modbus_ids__(self) -> str:
+      meters = self.xmlConf.findall("meters/meter")
+      out = []
+      for m in meters:
+         out.append(m.attrib["busAddress"])
+      return ", ".join(out)

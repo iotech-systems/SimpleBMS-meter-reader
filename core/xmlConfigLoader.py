@@ -1,9 +1,10 @@
 
-import os.path
+import os.path, typing as t
 import xml.etree.ElementTree as et
+from ommslib.shared.core import ttyDeviceScanner as tds
 
 
-START_CONF_XML = "conf/sbmsModbusProcesses.xml"
+MODBUS_PROCS_XML = "conf/modbusProcesses.xml"
 STREAM_DEFS_XML = "streams/registerStreamDefinitions.xml"
 
 
@@ -12,8 +13,11 @@ class xmlConfigLoader(object):
    cache = {}
 
    def __init__(self):
+      self.hostname = None
+      with open("/etc/hostname") as h:
+         self.hostname = h.read().strip()
       self.regStreamDefsXml: et.ElementTree = None
-      self.startConfXml: et.ElementTree = None
+      self.modbusProcsXml: et.ElementTree = None
 
    @staticmethod
    def __confirm_conf_files__():
@@ -25,7 +29,10 @@ class xmlConfigLoader(object):
       try:
          xmlConfigLoader.__confirm_conf_files__()
          self.regStreamDefsXml = et.ElementTree().parse(STREAM_DEFS_XML)
-         self.startConfXml = et.ElementTree().parse(START_CONF_XML)
+         tmp: et.Element = et.ElementTree().parse(MODBUS_PROCS_XML)
+         xpath = f"edge[@hostname=\"{self.hostname}\"]"
+         self.modbusProcsXml = tmp.find(xpath)
+         # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
          return True
       except FileNotFoundError as e:
          print(f"\n{e}\n\t--- stopping config loading process ---\n")
@@ -34,7 +41,7 @@ class xmlConfigLoader(object):
 
    def dump(self):
       print("\n--- loaded config elements ---")
-      print(self.startConfXml)
+      print(self.modbusProcsXml)
       print(self.regStreamDefsXml)
 
    def getStreamTypeRegisters(self, streamType: str) -> et.Element:
@@ -64,3 +71,47 @@ class xmlConfigLoader(object):
       tmpXml = et.ElementTree().parse(fn)
       xmlConfigLoader.cache[fn] = tmpXml
       return xmlConfigLoader.cache[fn]
+
+   def detectModbusAddressCollisions(self) -> tuple:
+      xpath = "modbusProcess/meters/meter"
+      meters: t.List[et.Element] = self.modbusProcsXml.findall(xpath)
+      if len(meters) == 0:
+         raise Exception("NoMetersFound!")
+      ids = []; out = []
+      for meter in meters:
+         busAddress = int(meter.attrib["busAddress"])
+         if busAddress not in ids:
+            ids.append(busAddress)
+         else:
+            out.append(busAddress)
+      # -- return --
+      return tuple(out)
+
+   """
+      
+   """
+   def detectMeterSerialDevices(self):
+      xpath = "modbusProcess"
+      devScanner: tds.ttyUSBDeviceScanner
+      modbusProcs: t.List[et.Element] = self.modbusProcsXml.findall(xpath)
+      """
+         each modbus process scans number of meters on a meter-data-bus
+         each meter-data-bus is linked over serial port over usb ie: /dev/ttyUSBx 
+      """
+      for modbusProc in modbusProcs:
+         try:
+            print(f"\n\t-- pre-scanning: {modbusProc.attrib} --")
+            ttyDev = modbusProc.attrib["ttyDevice"]
+            if ttyDev.upper() == tds.ttyUSBDeviceScanner.AUTO:
+               devScanner = tds.ttyUSBDeviceScanner()
+               meters = modbusProc.findall("meters/meter")
+               # -- should return dev string & update modbusProc xml --
+               usbPort = devScanner.locateMetersUSBSerialPort(meters)
+               if usbPort is None:
+                  modbusProc.attrib["ttyDevice"] = "NotFound"
+               else:
+                  modbusProc.attrib["ttyDevice"] = usbPort.device
+               # -- post scan --
+               print(f"\t-- post-scanning: {modbusProc.attrib} --")
+         except Exception as e:
+            print(e)
