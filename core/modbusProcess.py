@@ -50,7 +50,7 @@ class modbusProcess(Process):
 
    def run(self) -> None:
       try:
-         setproctitle.setproctitle("modbus-scanner")
+         setproctitle.setproctitle("omms-modbus")
          # - - start monitor thread - -
          if not self.__start_monitor_thread__():
             print("unable to start modbus processor thread loop")

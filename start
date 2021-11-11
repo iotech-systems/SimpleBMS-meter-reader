@@ -9,7 +9,7 @@ from ommslib.shared.models import infoReport
 
 
 CONF_LOADER: xmlConfigLoader.xmlConfigLoader
-PROC_NAME = "openbms-edge"
+PROC_NAME = "omms-edge"
 
 
 def main():
