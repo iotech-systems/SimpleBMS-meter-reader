@@ -19,10 +19,11 @@ class modbusProcess(Process):
       this should take a tuple of stream threads definitions
       will need a way to schedule a stream thread to run
    """
-   def __init__(self, xmlElmnt: etXml.Element):
+   def __init__(self, xmlElmnt: etXml.Element, xpid: int = 0):
       super().__init__(daemon=True)
       # - - - - - - - - -
-      print(f"\n[ c-tor: modbusProcess ]\n")
+      print(f"\n[ c-tor: modbusProcess; xpid: {xpid}; ]\n")
+      self.xpid = xpid
       self.xmlConf: etXml.Element = xmlElmnt
       self.id: str = self.xmlConf.attrib["id"].strip()
       self.tag: str = self.xmlConf.attrib["tag"].strip()
@@ -50,7 +51,7 @@ class modbusProcess(Process):
 
    def run(self) -> None:
       try:
-         setproctitle.setproctitle("omms-modbus")
+         setproctitle.setproctitle(f"omms-modbus:{self.xpid}")
          # - - start monitor thread - -
          if not self.__start_monitor_thread__():
             print("unable to start modbus processor thread loop")

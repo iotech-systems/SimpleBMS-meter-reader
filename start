@@ -41,7 +41,7 @@ def main():
       srvStarter.initLoad()
       procs: List[modbusProcess.modbusProcess] = srvStarter.start()
       if len(procs) == 0:
-         print("\n\t-- openbms unable to start! ~ exiting --")
+         print("\n\t-- omms unable to start! ~ exiting --")
          exit(2)
       # - - - - - - -
       monitorLoop: serviceMonitorLoop.serviceMonitorLoop = \

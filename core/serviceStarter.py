@@ -23,6 +23,7 @@ class serviceStarter(object):
       # get all modbusProcess xml nodes
       tag = "modbusProcess"
       procsDefs: List[et.Element] = self.conf.modbusProcsXml.findall(tag)
+      xpid = -1
       for procDef in procsDefs:
          # start only those marked for start with yes
          if procDef.attrib[modbusAttrib.start].upper() == "YES":
@@ -32,7 +33,8 @@ class serviceStarter(object):
                print(f"\t{procDef.attrib}")
                continue
             # -- should run this process --
-            self.modbusProcessors.append(modbusProcess.modbusProcess(procDef))
+            xpid += 1
+            self.modbusProcessors.append(modbusProcess.modbusProcess(procDef, xpid=xpid))
 
    def __init_modbus_processors__(self):
       for modProc in self.modbusProcessors:
