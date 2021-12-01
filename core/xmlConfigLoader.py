@@ -87,8 +87,7 @@ class xmlConfigLoader(object):
       # -- return --
       return tuple(out)
 
-   """
-      
+   """  
    """
    def detectMeterSerialDevices(self):
       xpath = "modbusProcess"

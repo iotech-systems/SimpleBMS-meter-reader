@@ -9,6 +9,7 @@ import ommslib.shared.models.alarmReport as ar
 import ommslib.shared.models.infoReport as ir
 
 
+# this system's epoch :)
 BASE_DATE_2020 = datetime.datetime(2020, 1, 1, 0, 0, 1)
 
 
@@ -64,8 +65,10 @@ class actions(object):
             print("\t -> alarm report saved!")
             print(f"\t -> res: {res.text}\n")
          else:
+            # todo: implement local caching
             print(f"none 200 code: {res.status_code}")
       except (r.exceptions.ConnectionError, Exception) as e:
+         # todo: implement local caching
          print(e)
 
    @staticmethod
