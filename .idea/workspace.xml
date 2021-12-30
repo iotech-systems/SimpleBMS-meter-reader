@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="535b6946-9c58-4fde-b7d2-11508b203425" name="Changes" comment="" />
+    <list default="true" id="535b6946-9c58-4fde-b7d2-11508b203425" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/modbusProcesses.xml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/modbusProcesses.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ommslib/shared/models/basicPwrStatsReport.py" beforeDir="false" afterPath="$PROJECT_DIR$/ommslib/shared/models/basicPwrStatsReport.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="false" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,7 +23,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -31,6 +36,9 @@
   <component name="HierarchyBrowserManager">
     <option name="SCOPE" value="All" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1wgAKNJBXW0vQ54Lg8DS7IDYr16" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -40,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/dev/sbms-gate/sbms-rest-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
   </component>
@@ -211,11 +219,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_EDIT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="false" />
-    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="false" />
     <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
