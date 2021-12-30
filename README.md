@@ -1,4 +1,4 @@
 ![OpenMMS Logo](https://iotech.systems/imgs/omms-logo-1200px.png)
 
-# omms-meters module
+# omms-edge module
 [Project Website](http://omms.iotech.systems/)
