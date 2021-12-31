@@ -18,7 +18,7 @@ def main():
       global CONF_LOADER
       CONF_LOADER = xmlConfigLoader.xmlConfigLoader()
       if not CONF_LOADER.loadConfXMLs():
-         print("\t--- openbms exiting ---")
+         print(f"\t--- {PROC_NAME} exiting ---")
          exit(1)
       # -- check for modbus address conflicts --
       mbCollisions = CONF_LOADER.detectModbusAddressCollisions()
@@ -36,12 +36,12 @@ def main():
       print(buff)
       CONF_LOADER.detectMeterSerialDevices()
       # - - - - - - -
-      print("\n\t-- openbms starting --")
+      print(f"\n\t-- {PROC_NAME} starting --")
       srvStarter: ss.serviceStarter = ss.serviceStarter(CONF_LOADER)
       srvStarter.initLoad()
       procs: List[modbusProcess.modbusProcess] = srvStarter.start()
       if len(procs) == 0:
-         print("\n\t-- omms unable to start! ~ exiting --")
+         print(f"\n\t-- {PROC_NAME} unable to start! ~ exiting --")
          exit(2)
       # - - - - - - -
       monitorLoop: serviceMonitorLoop.serviceMonitorLoop = \
