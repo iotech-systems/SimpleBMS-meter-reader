@@ -50,7 +50,8 @@
     </edge>
     <edge hostname="omms-edge-p16">
         <!-- modbusProcess runs per tty device -->
-        <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto">
+        <process type="modbus" id="0x0001" start="yes" tag="ModbusA" ttyDevice=""
+            deviceSerialByPath="platform-3f980000.usb-usb-0:1.1.3.2:1.0-port0">
             <meters>
                 <meter busType="modbus" busAddress="15" brand="orno" modelXML="orno516.xml" />
                 <meter busType="modbus" busAddress="16" brand="orno" modelXML="orno516.xml" />
@@ -66,7 +67,7 @@
                 <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="6" />
                 <job type="registerStream" startIndex="2"  streamType="basicPwrStats" intervalMins="2" />
             </processorJobs>
-        </modbusProcess>
+        </process>
         <!-- modbusProcess runs per tty device -->
         <modbusProcess id="0x0002" start="yes" tag="ModbusB" ttyDevice="auto">
              <meters>
