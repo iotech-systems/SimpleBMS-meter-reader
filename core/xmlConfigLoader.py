@@ -32,6 +32,9 @@ class xmlConfigLoader(object):
          tmp: et.Element = et.ElementTree().parse(MODBUS_PROCS_XML)
          xpath = f"edge[@hostname=\"{self.hostname}\"]"
          self.modbusProcsXml = tmp.find(xpath)
+         if self.modbusProcsXml is None:
+            print(f"nothing for for xpath: {xpath}\n -- the end --\n")
+            exit(1)
          # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
          return True
       except FileNotFoundError as e:
