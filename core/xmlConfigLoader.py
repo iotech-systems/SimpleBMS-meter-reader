@@ -33,7 +33,7 @@ class xmlConfigLoader(object):
          xpath = f"edge[@hostname=\"{self.hostname}\"]"
          self.modbusProcsXml = tmp.find(xpath)
          if self.modbusProcsXml is None:
-            print(f"nothing for for xpath: {xpath}\n -- the end --\n")
+            print(f"\n - - -\nno XML for for xpath: {xpath}\n -- the end --\n")
             exit(1)
          # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
          return True
