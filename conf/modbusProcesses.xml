@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <system>
+     <edge hostname="omms-edge-roof">
+        <!-- modbusProcess runs per tty device -->
+        <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto"
+            devSerialPath="" >
+            <meters>
+                <meter busType="modbus" busAddress="2" brand="orno" modelXML="orno504.xml" />
+                <meter busType="modbus" busAddress="3" brand="orno" modelXML="orno504.xml" />
+                <meter busType="modbus" busAddress="4" brand="orno" modelXML="orno504.xml" />
+                <meter busType="modbus" busAddress="5" brand="orno" modelXML="orno504.xml" />
+                <meter busType="modbus" busAddress="6" brand="orno" modelXML="orno504.xml" />
+                <meter busType="modbus" busAddress="7" brand="orno" modelXML="orno504.xml" />
+            </meters>
+            <processorJobs>
+                <job type="registerStream" startIndex="1"  streamType="kWhrs" intervalMins="6" />
+                <job type="registerStream" startIndex="2"  streamType="basicPwrStats" intervalMins="2" />
+            </processorJobs>
+        </modbusProcess>
+    </edge>
     <edge hostname="omms-edge-a5">
         <!-- modbusProcess runs per tty device -->
         <modbusProcess id="0x0001" start="yes" tag="ModbusA" ttyDevice="auto"
