@@ -22,7 +22,7 @@ class xmlConfigLoader(object):
 
    @staticmethod
    def __confirm_conf_files__():
-      for fn in (STREAM_DEFS_XML, STREAM_DEFS_XML):
+      for fn in (STREAM_DEFS_XML, MODBUS_PROCS_XML):
          if not os.path.exists(fn):
             raise FileNotFoundError(fn)
 
@@ -81,8 +81,8 @@ class xmlConfigLoader(object):
       return xmlConfigLoader.cache[fn]
 
    def detectModbusAddressCollisions(self) -> tuple:
-      # xpath = "modbusProcess/meters/meter"
-      xpath = "process[@type=modbus]/meters/meter"
+      xpath = "modbusProcess/meters/meter"
+      # xpath = "process[@type=modbus]/meters/meter"
       meters: t.List[et.Element] = self.modbusProcsXml.findall(xpath)
       if len(meters) == 0:
          raise Exception("NoMetersFound!")
