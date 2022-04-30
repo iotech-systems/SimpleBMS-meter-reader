@@ -10,10 +10,22 @@ class serviceStarter(object):
    def __init__(self, conf: xmlConfigLoader.xmlConfigLoader):
       self.conf = conf
       self.modbusProcessors: List[modbusProcess.modbusProcess] = []
+      self.mqttProcessors: List[object] = []
 
    def initLoad(self):
-      self.__load_modbus_processors__()
-      self.__init_modbus_processors__()
+      # - - #
+      try:
+         self.__load_modbus_processors__()
+         self.__init_modbus_processors__()
+      except Exception as e:
+         print(e)
+      # - - #
+      try:
+         self.__load_mqtt_processors__()
+         self.__init_mqtt_processors__()
+      except Exception as e:
+         print(e)
+      # - - #
 
    def start(self) -> List[modbusProcess.modbusProcess]:
       self.__start_modbus_processors__()
@@ -43,3 +55,12 @@ class serviceStarter(object):
    def __start_modbus_processors__(self):
       for modProc in self.modbusProcessors:
          modProc.start()
+
+   def __load_mqtt_processors__(self):
+      pass
+
+   def __init_mqtt_processors__(self):
+      pass
+
+   def __start_mqtt_processors__(self):
+      pass

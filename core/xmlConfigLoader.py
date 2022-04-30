@@ -16,8 +16,9 @@ class xmlConfigLoader(object):
       self.hostname = None
       with open("/etc/hostname") as h:
          self.hostname = h.read().strip()
-      self.regStreamDefsXml: et.ElementTree = None
-      self.modbusProcsXml: et.ElementTree = None
+      self.regStreamDefsXml: [None, et.ElementTree] = None
+      self.modbusProcsXml: [None, et.ElementTree] = None
+      self.hostEdgeXml: [None, et.Element] = None
 
    @staticmethod
    def __confirm_conf_files__():
@@ -35,7 +36,11 @@ class xmlConfigLoader(object):
          if self.modbusProcsXml is None:
             print(f"\n - - -\n\tno XML for for xpath: {xpath}\n -- the end --\n")
             exit(1)
-         # self.modbusProcsXml = et.ElementTree().parse(MODBUS_PROCS_XML)
+         # -- new code --
+         self.hostEdgeXml = tmp.find(xpath)
+         if self.hostEdgeXml is None:
+            print(f"\n - - -\n\tno XML for for xpath: {xpath}\n -- the end --\n")
+            exit(1)
          return True
       except FileNotFoundError as e:
          print(f"\n{e}\n\t--- stopping config loading process ---\n")
@@ -76,7 +81,8 @@ class xmlConfigLoader(object):
       return xmlConfigLoader.cache[fn]
 
    def detectModbusAddressCollisions(self) -> tuple:
-      xpath = "modbusProcess/meters/meter"
+      # xpath = "modbusProcess/meters/meter"
+      xpath = "process[@type=modbus]/meters/meter"
       meters: t.List[et.Element] = self.modbusProcsXml.findall(xpath)
       if len(meters) == 0:
          raise Exception("NoMetersFound!")
