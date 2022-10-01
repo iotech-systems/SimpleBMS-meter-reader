@@ -72,6 +72,7 @@ class registerStreamJob(streamJobBase.streamJobBase):
          lstReadings = self.__readingsAsList(readings)
          jsonPackage = self.__createMeterJsonPackage__(busAdr, readTime, lstReadings
             , modelXml, streamRegsXml)
+         # -- send to server --
          actions.actions.send2streamer(jsonPackage)
          # -- return readings --
          return readings

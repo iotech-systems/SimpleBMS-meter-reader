@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<redis>
+   <!-- <arg name="readsPubServer" value="10.0.0.122:6370" /> -->
+   <arg name="readsPubServer" value="localhost:4444" />
+   <arg name="readsPubServerPwd" value="Q@@bcd!234##!" />
+   <arg name="readsPubChannel" value="OMMS_ELEC_READS_CK" />
+</redis>

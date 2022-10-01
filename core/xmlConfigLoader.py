@@ -1,16 +1,21 @@
 
-import os.path, typing as t
+import os.path
 import xml.etree.ElementTree as et
+import datetime, os.path, typing as t
 from ommslib.shared.core import ttyDeviceScanner as tds
 
 
 MODBUS_PROCS_XML = "conf/modbusProcesses.xml"
 STREAM_DEFS_XML = "streams/registerStreamDefinitions.xml"
+# /opt/iotech/omms/logs
+LOGS_FLDR = "/opt/iotech/omms/logs"
 
 
 class xmlConfigLoader(object):
 
    cache = {}
+   ttyStartLog = f"{LOGS_FLDR}/ttyUSBxStart.log"
+   ttyStartLogPrv = f"{LOGS_FLDR}/ttyUSBxStart.log_prv"
 
    def __init__(self):
       self.hostname = None
@@ -19,6 +24,12 @@ class xmlConfigLoader(object):
       self.regStreamDefsXml: [None, et.ElementTree] = None
       self.modbusProcsXml: [None, et.ElementTree] = None
       self.hostEdgeXml: [None, et.Element] = None
+      # -- new file on each start --
+      if os.path.exists(xmlConfigLoader.ttyStartLogPrv):
+         os.remove(xmlConfigLoader.ttyStartLogPrv)
+      # -- make backup --
+      if os.path.exists(xmlConfigLoader.ttyStartLog):
+         os.rename(xmlConfigLoader.ttyStartLog, xmlConfigLoader.ttyStartLogPrv)
 
    @staticmethod
    def __confirm_conf_files__():
@@ -36,7 +47,7 @@ class xmlConfigLoader(object):
          if self.modbusProcsXml is None:
             print(f"\n - - -\n\tno XML for for xpath: {xpath}\n -- the end --\n")
             exit(1)
-         # -- new code --
+         # -- find edge conf section --
          self.hostEdgeXml = tmp.find(xpath)
          if self.hostEdgeXml is None:
             print(f"\n - - -\n\tno XML for for xpath: {xpath}\n -- the end --\n")
@@ -102,10 +113,10 @@ class xmlConfigLoader(object):
       xpath = "modbusProcess"
       devScanner: tds.ttyUSBDeviceScanner
       modbusProcs: t.List[et.Element] = self.modbusProcsXml.findall(xpath)
-      """
-         each modbus process scans number of meters on a meter-data-bus
-         each meter-data-bus is linked over serial port over usb ie: /dev/ttyUSBx 
-      """
+      """ each modbus process scans number of meters on a meter-data-bus
+         each meter-data-bus is linked over serial port over usb ie: /dev/ttyUSBx """
+      logmsg = str(datetime.datetime.utcnow().replace(second=0, microsecond=0))
+      self.__start_log__(f"\n#START:[{logmsg}]#")
       for modbusProc in modbusProcs:
          try:
             print(f"\n\t-- pre-scanning: {modbusProc.attrib} --")
@@ -120,6 +131,23 @@ class xmlConfigLoader(object):
                else:
                   modbusProc.attrib["ttyDevice"] = usbPort.device
                # -- post scan --
-               print(f"\t-- post-scanning: {modbusProc.attrib} --")
+               self.__start_log__(f"{modbusProc.attrib}")
          except Exception as e:
             print(e)
+
+   def __start_log__(self, msg: str):
+      try:
+         # -- do --
+         print(f" >>> StartLogPrint: {msg}")
+         cnt = 0
+         print(f"fn: {xmlConfigLoader.ttyStartLog}")
+         with open(xmlConfigLoader.ttyStartLog, "a") as f:
+            cnt = f.write(f"{msg}\n")
+         print(f" char written cnt: {cnt}")
+         # -- read file --
+         print(f" [ fn: {xmlConfigLoader.ttyStartLog} ]")
+         with open(xmlConfigLoader.ttyStartLog, "r") as f:
+            print(f.read())
+         # -- the end --
+      except Exception as e:
+         print(e)
